@@ -1,0 +1,78 @@
+docker run -it -d ubuntu    //  Setup Two Docker Containers on Host
+
+docker images  //Verify Image Is Downloaded
+
+docker ps -a    //Verify Containers Are Up and Running
+
+docker exec -it _containder_id_ bash  //Setup NGINX in one of the Containers
+
+apt-get update  //Update the Package Manager
+
+apt-get install nginx  //Install NGINX
+
+service nginx reload    //Stand Up NGINX Web Server
+service nginx restart
+
+apt-get install curl  //Install cURL
+
+curl localhost   //Verify the Web Server is Running
+
+exit
+
+docker exec -it _container_id_ bash //  Log Into the Other Container
+
+apt-get update //  Update the Package Manager
+
+
+apt-get install nodejs    //Install Node
+apt-get install npm
+
+
+
+sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10   //Switch the Node Alias
+
+node -v    //Verify Node is Installed
+
+npm install express --save   //Express
+
+apt-get install curl   //Install cURL
+
+apt-get install vim     //Install VIM Text Editor
+
+vim app.js      //Create Node.js Web Server on Port 3000
+
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('Welcome to Hippo!');
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+
+
+:wq!   // save and exit from the file
+
+
+npm install forever -g    //  Install Forever for Node.js
+
+forever start app.js      // Stand Up Node Server as Daemon
+
+curl localhost:3000       //Verify the Node Server is Working
+
+exit + enter          // Log Out of Container
+
+docker inspect _container_id_ | egrep '"IPAddress":[^,]+'  //  Get IP Address of Container
+
+curl _ip_address_:3000        //Verify Node.js Container Service from Host
+
+curl _ip_address_:80          // Verify NGINX Container Service from Host
+
+*****Interface Between Docker Containers****
+
+docker exec -it _container_id_ bash     //  Log Into Node.js Container
+
+curl _nginx_docker_ip_address_          // cURL NGINX Web Server
+
